@@ -1,12 +1,13 @@
 const WebpackChain = require('webpack-chain')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const configs = require('./configuration')
+const configuration = require('./configuration')
 
 const webpackChain = new WebpackChain()
 
-Object.keys(configs.ENTRY).forEach(name =>
-  webpackChain.entry(name).add(configs.ENTRY[name]),
+Object.keys(configuration.ENTRY).forEach(name =>
+  webpackChain.entry(name).add(configuration.ENTRY[name]),
 )
 
 /** js */
@@ -27,7 +28,9 @@ webpackChain.module
   .test(/\.(c|le)ss$/)
   .use('style')
   .loader(
-    configs.MODE_DEVELOPMENT ? 'style-loader' : MiniCssExtractPlugin.loader,
+    configuration.MODE_DEVELOPMENT
+      ? 'style-loader'
+      : MiniCssExtractPlugin.loader,
   )
   .end()
   .use('css')
@@ -54,12 +57,12 @@ webpackChain.module
   .use('pug')
   .loader('pug-loader')
 
-/** plugin */
+/** plugins */
 webpackChain.plugin('html').use(HtmlWebPackPlugin, [
   {
-    title: configs.TITLE,
-    meta: configs.META,
-    favicon: configs.FAVICON,
+    title: configuration.TITLE,
+    meta: configuration.META,
+    favicon: configuration.FAVICON,
     template: './public/index.pug',
     hash: true,
     xhtml: true,
@@ -68,8 +71,8 @@ webpackChain.plugin('html').use(HtmlWebPackPlugin, [
 
 /** resolve */
 /** alias */
-Object.keys(configs.ALIAS).forEach(name => {
-  webpackChain.resolve.alias.set(name, configs.ALIAS[name])
+Object.keys(configuration.ALIAS).forEach(name => {
+  webpackChain.resolve.alias.set(name, configuration.ALIAS[name])
 })
 
 /** 用于描述的 JSON 文件 */
@@ -91,6 +94,6 @@ webpackChain.resolve.mainFields
 /** 解析目录时要使用的文件名。 */
 webpackChain.resolve.mainFiles.add('index')
 
-webpackChain.resolve.modules.add(configs.MODULES).add('node_modules')
+webpackChain.resolve.modules.add(configuration.MODULES).add('node_modules')
 
 module.exports = webpackChain

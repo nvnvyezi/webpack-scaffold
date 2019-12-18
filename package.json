@@ -1,7 +1,7 @@
 {
   "scripts": {
     "lint": "eslint src --fix --ext .ts,.tsx",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --colors --config ./config/webpack.dev.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --colors --config ./config/server.js",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js"
   },
   "devDependencies": {
@@ -36,6 +36,7 @@
     "lint-staged": "^9.5.0",
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "portfinder": "^1.0.25",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
     "pug": "^2.0.4",

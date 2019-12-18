@@ -19,7 +19,7 @@ exports.ALIAS = {
 
 /** devServer */
 /** 指定使用一个 host。默认是 localhost */
-exports.HOST = 'localhost'
+exports.HOST = ''
 exports.PORT = 8000
 /** 是否自动打开页面 */
 exports.OPEN = false
