@@ -44,6 +44,6 @@ exports.HTTPS = {}
 /** 添加meta标签 */
 exports.META = {}
 /** 网页title */
-exports.TITLE = 'title'
+exports.TITLE = 'webpack-scaffold'
 /** favicon路径 */
-exports.FAVICON = ''
+exports.FAVICON = resolve('../public/favicon.ico')

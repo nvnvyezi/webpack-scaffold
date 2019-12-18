@@ -1,16 +1,16 @@
-const Config = require('webpack-chain')
+const WebpackChain = require('webpack-chain')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 const configs = require('./configuration')
 
-const config = new Config()
+const webpackChain = new WebpackChain()
 
 Object.keys(configs.ENTRY).forEach(name =>
-  config.entry(name).add(configs.ENTRY[name]),
+  webpackChain.entry(name).add(configs.ENTRY[name]),
 )
 
 /** js */
-config.module
+webpackChain.module
   .rule('js')
   .test(/\.(jsx?|tsx?)$/)
   .exclude.add(/node_modules/)
@@ -22,7 +22,7 @@ config.module
   })
 
 /** style */
-config.module
+webpackChain.module
   .rule('css')
   .test(/\.(c|le)ss$/)
   .use('style')
@@ -37,7 +37,7 @@ config.module
   .loader('less-loader')
 
 /** 图片 */
-config.module
+webpackChain.module
   .rule('image')
   .test(/\.(png|jpg|gif|svg|webp)/)
   .exclude.add(/node_modules/)
@@ -47,20 +47,21 @@ config.module
   .options({
     limit: 8192,
   })
+/** pug */
+webpackChain.module
+  .rule('pug')
+  .test(/\.pug$/)
+  .use('pug')
+  .loader('pug-loader')
 
 /** plugin */
-config.plugin('html').use(HtmlWebPackPlugin, [
+webpackChain.plugin('html').use(HtmlWebPackPlugin, [
   {
-    cache: true,
-    favicon: configs.FAVICON,
     title: configs.TITLE,
-    template: './public/index.html',
-    filename: './index.html',
-    inject: true,
-    hash: true,
     meta: configs.META,
-    minify: { collapseWhitespace: true },
-    showErrors: true,
+    favicon: configs.FAVICON,
+    template: './public/index.pug',
+    hash: true,
     xhtml: true,
   },
 ])
@@ -68,28 +69,28 @@ config.plugin('html').use(HtmlWebPackPlugin, [
 /** resolve */
 /** alias */
 Object.keys(configs.ALIAS).forEach(name => {
-  config.resolve.alias.set(name, configs.ALIAS[name])
+  webpackChain.resolve.alias.set(name, configs.ALIAS[name])
 })
 
 /** 用于描述的 JSON 文件 */
-config.resolve.descriptionFiles.add('package.json')
+webpackChain.resolve.descriptionFiles.add('package.json')
 
 /** 自动解析确定的扩展 */
-config.resolve.extensions
+webpackChain.resolve.extensions
   .add('.ts')
   .add('.tsx')
   .add('.js')
   .add('.jsx')
   .add('.json')
 
-config.resolve.mainFields
+webpackChain.resolve.mainFields
   .add('jsnext:main')
   .add('browser')
   .add('main')
 
 /** 解析目录时要使用的文件名。 */
-config.resolve.mainFiles.add('index')
+webpackChain.resolve.mainFiles.add('index')
 
-config.resolve.modules.add(configs.MODULES).add('node_modules')
+webpackChain.resolve.modules.add(configs.MODULES).add('node_modules')
 
-module.exports = config
+module.exports = webpackChain

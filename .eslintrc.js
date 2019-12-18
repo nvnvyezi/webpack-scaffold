@@ -10,7 +10,11 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       extends: ['plugin:@typescript-eslint/recommended'],
       parser: '@typescript-eslint/parser',
-      plugins: ['@typescript-eslint/eslint-plugin'],
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-unused-vars': 'warn',
+      },
     },
   ],
   extends: [
@@ -49,7 +53,5 @@ module.exports = {
   rules: {
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-unused-vars': 'warn',
   },
 }
