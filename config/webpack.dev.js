@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const ip = require('ip')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const webpackBase = require('./webpack.base')
@@ -31,10 +32,10 @@ webpackBase.plugin('friend').use(FriendlyErrorsWebpackPlugin, [
     clearConsole: true,
     compilationSuccessInfo: {
       messages: [`Project is running at http://localhost:${configs.PORT}/`],
-      notes: ['注意'],
+      notes: [`or open: http://${ip.address()}:${configs.PORT}`],
     },
     onErrors: function(severity, errors) {
-      console.log(severity, errors)
+      console.error(severity, errors)
     },
   },
 ])
