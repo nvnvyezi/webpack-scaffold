@@ -1,6 +1,7 @@
 {
   "scripts": {
     "commit": "git-cz",
+    "genlog": "npx conventional-changelog -p angular -i ./CHANGELOG.md -s",
     "lint": "eslint src --fix --ext .ts,.tsx",
     "start": "cross-env NODE_ENV=development webpack-dev-server --colors --config ./config/server.js",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js"
@@ -21,6 +22,7 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "commitizen": "^4.0.3",
+    "conventional-changelog-cli": "^2.0.31",
     "cross-env": "^6.0.3",
     "css-loader": "^3.3.2",
     "cz-conventional-changelog": "^3.0.2",
