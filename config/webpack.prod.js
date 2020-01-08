@@ -1,8 +1,10 @@
 const webpack = require('webpack')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 
 const smp = new SpeedMeasurePlugin({
   outputFormat: 'humanVerbose',
@@ -46,6 +48,14 @@ config.plugin('hash').use(webpack.HashedModuleIdsPlugin, [
     hashFunction: 'sha256',
     hashDigest: 'hex',
     hashDigestLength: 4,
+  },
+])
+
+config.plugin('bundle').use(BundleAnalyzerPlugin, [
+  {
+    analyzerMode: 'static',
+    openAnalyzer: true,
+    logLevel: 'info',
   },
 ])
 
