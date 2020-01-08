@@ -1,6 +1,8 @@
+const chalk = require('chalk')
 const WebpackChain = require('webpack-chain')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin')
 
 const configuration = require('./configuration')
 
@@ -66,6 +68,17 @@ webpackChain.plugin('html').use(HtmlWebPackPlugin, [
     template: './public/index.pug',
     hash: true,
     xhtml: true,
+  },
+])
+
+webpackChain.plugin('progress').use(ProgressBarWebpackPlugin, [
+  {
+    format: `  build [:bar]  ${chalk.green.bold(
+      ':msg :percent',
+    )} (:elapsed seconds)`,
+    complete: '=',
+    incomplete: '',
+    clear: false,
   },
 ])
 

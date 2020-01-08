@@ -16,7 +16,7 @@ webpackBase.devServer
   .inline(true)
   .open(configuration.OPEN)
   // .port(configuration.PORT)
-  .progress(true)
+  .progress(false)
   .proxy(configuration.PROXY)
   .quiet(true)
   .stats(configuration.STATS || 'minimal')
