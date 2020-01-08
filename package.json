@@ -4,6 +4,7 @@
     "genlog": "npx conventional-changelog -p angular -i ./CHANGELOG.md -s",
     "lint": "eslint src --fix --ext .ts,.tsx",
     "start": "cross-env NODE_ENV=development webpack-dev-server --colors --config ./config/server.js",
+    "start:speed": "cross-env NODE_ENV=development SPEED_MEASURE=show webpack-dev-server --colors --config ./config/server.js",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js"
   },
   "devDependencies": {

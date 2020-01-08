@@ -1,7 +1,9 @@
 const ip = require('ip')
 const portfinder = require('portfinder')
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
+const smp = new SpeedMeasureWebpackPlugin()
 const WebpackDev = require('./webpack.dev')
 const configuration = require('./configuration')
 
@@ -27,7 +29,11 @@ module.exports = new Promise((resolve, reject) => {
           },
         },
       ])
-      resolve(WebpackDev.toConfig())
+      if (process.env.SPEED_MEASURE === 'show') {
+        resolve(smp.wrap(WebpackDev.toConfig()))
+      } else {
+        resolve(WebpackDev.toConfig())
+      }
     }
   })
 })
