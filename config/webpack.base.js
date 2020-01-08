@@ -3,7 +3,7 @@ const WebpackChain = require('webpack-chain')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarWebpackPlugin = require('progress-bar-webpack-plugin')
-
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const configuration = require('./configuration')
 
 const webpackChain = new WebpackChain()
@@ -81,6 +81,8 @@ webpackChain.plugin('progress').use(ProgressBarWebpackPlugin, [
     clear: false,
   },
 ])
+
+webpackChain.plugin('duplicate').use(DuplicatePackageCheckerPlugin)
 
 /** resolve */
 /** alias */
