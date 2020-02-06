@@ -44,7 +44,7 @@ webpackChain.module
 /** 图片 */
 webpackChain.module
   .rule('image')
-  .test(/\.(png|jpg|gif|svg|webp)/)
+  .test(/\.(png|jpg|svg|gif|webp)/)
   .exclude.add(/node_modules/)
   .end()
   .use('url')
@@ -52,6 +52,7 @@ webpackChain.module
   .options({
     limit: 8192,
   })
+
 /** pug */
 webpackChain.module
   .rule('pug')
