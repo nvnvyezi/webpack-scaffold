@@ -9,6 +9,11 @@ function App() {
     <div>
       webpack
       <img src={gif} alt="测试gif" />
+      <style jsx>{`
+        div {
+          color: red;
+        }
+      `}</style>
     </div>
   )
 }

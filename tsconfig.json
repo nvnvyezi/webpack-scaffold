@@ -36,9 +36,9 @@
     "strictNullChecks": true,
     // 指定ECMAScript目标版本
     "target": "esnext",
-    // "allowJs": true,
+    "allowJs": true,
     "typeRoots": ["./global.d.ts"]
-  },
-  "include": ["src/**/*", "./global.d.ts"],
-  "exclude": ["node_modules"]
+  }
+  // "include": ["src/**/*", "./global.d.ts"],
+  // "exclude": ["node_modules"]
 }
