@@ -13,6 +13,7 @@ const presets = [
 
 const plugins = [
   ['@babel/plugin-transform-runtime'],
+  ['transform-class-properties', { spec: true }],
   [
     'styled-jsx/babel',
     {
